@@ -146,56 +146,12 @@
 </code></pre><p>可以很清楚的发现通过<code>typeof</code>指令能得到大多数值的类型，然而这里没有出现<code>null</code> <code>object</code>相关代码。这是因为<code>typeof null</code>的结果也是<code>object</code>，这是<code>JavaScript</code>设计的错误，所以如果想判断是否类型为<code>null</code>,可以通过</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!a&amp;&amp;typeof a === &apos;object&apos;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>我们可以使用<code>typeof</code>指令来检查<code>undeclared</code>变量，因为<code>typeof</code>有安全防范机制（阻止报错）<br>&lt;!- -more- -&gt;</p>
-</li>
-</ol>
-<h2 id="值"><a href="#值" class="headerlink" title="值"></a>值</h2><blockquote>
-<p>数组(<code>array</code>)、字符串(<code>string</code>)、数字(<code>number</code>)是<code>JavaScript</code>的程序基本组成部分，但在使用过程中，还是有一些坑</p>
-</blockquote>
-<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><blockquote>
-<p>相对于其他强类型语言来说，<code>JavaScript</code>中的数组是不用事先声明数组容量和类型的，所以数组可以容纳任意类型的值</p>
-</blockquote>
-<ol>
-<li>可以使用<code>delete</code>运算符删除数组中的元素，但数组的长度并不会减少</li>
-<li>数组是通过数字索引来获取值的，但由于数组同样是对象，所以可以通过对象的方式获取值<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var a = []</span><br><span class="line">a[0] = 1</span><br><span class="line">a[&apos;today&apos;] = &apos;sunday&apos;</span><br><span class="line"></span><br><span class="line">a.length // 1</span><br><span class="line">a[&apos;today] // &apos;sunday&apos;</span><br><span class="line">a.today // &apos;sunday&apos;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<blockquote>
-<p>这里有两点要注意的是，使用字符串键值来赋值的话，数组的长度并不会增加；如果字符串键值是可以被强制转换为数字的值的话，会被当做数字索引来处理<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a[&apos;2018&apos;] = 2018</span><br><span class="line">a[&apos;2018&apos;] // 2018</span><br><span class="line">a[2018] //2018</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<p>所以通过数组来存放字符串键值/属性并不是很合适的做法，应该使用对象</p>
-<h4 id="类数组"><a href="#类数组" class="headerlink" title="类数组"></a>类数组</h4><blockquote>
-<p>类数组是具有数组的某种特性（可以通过数字索引）的值，我们可以通过某些方式，例如<code>slice</code>,<code>concat</code>等数组工具函数来实现将其转换为真正的数组</p>
-</blockquote>
-<p><img src="https://s1.ax1x.com/2018/06/27/PiC49x.png" alt="转换类数组"></p>
-<p>如上图的两种方法，都可以将类数组转换为真正的数组</p>
-<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><blockquote>
-<p>字符串和数组很相似，都由<code>length</code>属性以及<code>indexOf()</code>、<code>concat()</code>方法，但字符串不等于字符数组</p>
-</blockquote>
-<ol>
-<li>字符串是不可变的，而数组是可变的。这里指的不可变是字符串的原始成员不会被改变值，而是会创建并返回一个新的字符串<br><img src="https://s1.ax1x.com/2018/06/27/PiCOUA.png" alt="字符串不是字符数组"></li>
-<li><p>字符串和数组可以通过函数进行相互的处理，这在某些时候是很方便的<br><img src="https://s1.ax1x.com/2018/06/27/PiParD.png" alt="字符串反转"></p>
-<h3 id="数字"><a href="#数字" class="headerlink" title="数字"></a>数字</h3><blockquote>
-<p><code>JavaScript</code>只有一种数值类型：数字(number)，包括整数以及带小数的十进制数。</p>
-</blockquote>
-</li>
-<li><p>可以使用<code>toFixed</code>保留小数部分位数(但有坑)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">12.toFixed(3) //SyntaxError</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>如果直接使用值去调用数值方法，将会报错，因为解析的时候会认为<code>12.</code>是整体，可以通过以下方法调用数值方法<br><img src="https://s1.ax1x.com/2018/06/27/PiP7R0.png" alt="调用数值方法"></p>
-<ol start="2">
-<li><code>NaN</code>值<code>Not a Number</code>即不是数值，<code>NaN</code>不等于<code>NaN</code></li>
-<li><code>null</code>值空值，<code>undefined</code>值没有值</li>
-<li><code>0</code>值包括<code>+0</code>和<code>-0</code><h3 id="值和引用"><a href="#值和引用" class="headerlink" title="值和引用"></a>值和引用</h3><blockquote>
-<p><code>JavaScript</code>中值的几种类型，在实际的赋值和参数传递中，分为值传递和引用传递</p>
-</blockquote>
-</li>
-<li>值传递是指直接复制指的方法进行赋值，简单类型的赋值都是值传递</li>
-<li>引用传递是指将复杂类型值的存储地址赋给变量，这样相当于两者共享一个空间，都可对该地址的值做出更改，并会影响对方</li>
-</ol>
+<li><p>我们可以使用<code>typeof</code>指令来检查<code>undeclared</code>变量，因为<code>typeof</code>有安全防范机制（阻止报错）</p>
 
-
+    
+	  <div class="readmore">
+      <a href="/2018/06/27/你不知道的JavaScript-中卷-笔记-一/">Read More</a>
+    </div>
     
     
     
@@ -233,19 +189,12 @@
 <h3 id="使用source-map"><a href="#使用source-map" class="headerlink" title="使用source map"></a>使用source map</h3><blockquote>
 <p><code>webpack</code>能够打包我们的代码，虽然使用起来很方便，但在排除错误时，只会指向我们打包生成的<code>bundle.js</code>，很难定位到相应的准确位置。使用<code>source map</code>,能够跟踪错误的警告信息。<br><a href="https://webpack.docschina.org/configuration/devtool" target="_blank" rel="noopener">source map</a>有许多配置信息，可以仔细查阅<br><code>webpack.config.js</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">const path = require(&apos;path&apos;)</span><br><span class="line">const HtmlWebpackPlugin = require(&apos;html-webpack-plugin&apos;)</span><br><span class="line">const CleanWebpackPlugin = require(&apos;clean-webpack-plugin&apos;)</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    app: &apos;./src/index.js&apos;,</span><br><span class="line">    print: &apos;./src/print.js&apos;</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [</span><br><span class="line">    new HtmlWebpackPlugin(&#123;</span><br><span class="line">      title: &apos;Output Management&apos;</span><br><span class="line">    &#125;),</span><br><span class="line">    new CleanWebpackPlugin([&apos;dist&apos;])</span><br><span class="line">  ],</span><br><span class="line">  output: &#123;</span><br><span class="line">    filename: &apos;[name].bundle.js&apos;,</span><br><span class="line">    path: path.resolve(__dirname, &apos;dist&apos;)</span><br><span class="line">  &#125;,</span><br><span class="line">  devtool: &apos;inline-cheap-module-source-map&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 </blockquote>
-<p>在<code>devtool</code>字段中写入对应的<code>source map</code>选项，实现不同的调试效果<br><img src="https://s1.ax1x.com/2018/06/25/PCwaS1.png" alt="效果"><br>&lt;!- -more- -&gt;</p>
-<h3 id="使用观察模式"><a href="#使用观察模式" class="headerlink" title="使用观察模式"></a>使用观察模式</h3><blockquote>
-<p>在使用<code>webpack</code>打包之后，如果修改了依赖文件内容，程序并不会主动做出修改，需要我们重新进行打包，这当然是繁琐的，所以可以使用<code>webpack</code>自带的观察模式，即使用<code>wepack &quot;watch&quot;</code>监听文件</p>
-</blockquote>
-<p>可以在<code>package.json</code>文件的<code>script</code>脚本命令中添加启动<code>webpack</code>观察模式的命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;watch&quot;: &quot;webpack --watch&quot;,</span><br></pre></td></tr></table></figure></p>
-<p>当我们在命令行中运行<code>npm run watch</code>命令之后，可以看到<code>webopack</code>在编译代码，但不会退出，当我们修改了我们的代码之后，保存，<code>webpack</code>会自动重新编译修改后的模块</p>
-<h3 id="使用webpack-dev-server"><a href="#使用webpack-dev-server" class="headerlink" title="使用webpack-dev-server"></a>使用<code>webpack-dev-server</code></h3><blockquote>
-<p><code>index.html</code>虽然可以双击直接运行，但肯定不如在服务器上运行来得便捷，可以使用<code>live-server</code>来构建一个本地服务器。但在<code>webpack</code>中我们也可以配置<code>webpack-dev-server</code>来构建简单的<code>web</code>服务器，而且能够实现实时重新加载。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">devServer: &#123;</span><br><span class="line">    contentBase: &apos;./dist/&apos;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<p>以上配置告知<code>webpack-dev-server</code>，在<code>localhost:8080</code>下建立服务，将<code>dist</code>目录下的文件，作为可访问的文件<br>在<code>package.json</code>文件中配置脚本命令，可以直接运行开发服务器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">     &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;,</span><br><span class="line">     &quot;watch&quot;: &quot;webpack --watch&quot;,</span><br><span class="line">    &quot;start&quot;: &quot;webpack-dev-server --open&quot;,</span><br><span class="line">     &quot;build&quot;: &quot;webpack&quot;</span><br><span class="line">   &#125;,</span><br></pre></td></tr></table></figure></p>
+<p>在<code>devtool</code>字段中写入对应的<code>source map</code>选项，实现不同的调试效果<br><img src="https://s1.ax1x.com/2018/06/25/PCwaS1.png" alt="效果"></p>
 
-
+    
+	  <div class="readmore">
+      <a href="/2018/06/25/webpack建立开发环境/">Read More</a>
+    </div>
     
     
     
@@ -282,19 +231,12 @@
 </blockquote>
 <h3 id="webpack的四个核心概念"><a href="#webpack的四个核心概念" class="headerlink" title="webpack的四个核心概念"></a>webpack的四个核心概念</h3><h4 id="入口-entry"><a href="#入口-entry" class="headerlink" title="入口(entry)"></a>入口(<code>entry</code>)</h4><p>入口起点标明了<code>webpack</code>应该使用哪个模块，从哪个文件作为构建依赖包的开始<br>可以在<code>webpack.config.js</code>中的<code>entry</code>配置简单入口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  entry: &apos;./path/to/my/entry/file.js&apos;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
 <p>当然也可以传入一个数组，这会创建多个主入口<br>出口指明<code>webpack</code>在哪里输出他所创建的<code>bundles</code>，以及如何对文件命名，默认值为<code>./dist</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">const path = require(&apos;path&apos;);</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">  entry: &apos;./path/to/my/entry/file.js&apos;,</span><br><span class="line">  output: &#123;</span><br><span class="line">    path: path.resolve(__dirname, &apos;dist&apos;),</span><br><span class="line">    filename: &apos;my-first-webpack.bundle.js&apos;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>上面的代码简单的表示了<code>output</code>的作用，通过<code>path</code>,<code>filename</code>对输出的文件进行路径以及名称的设置<br>&lt;!- -more- -&gt;</p>
-<h4 id="loader"><a href="#loader" class="headerlink" title="loader"></a><code>loader</code></h4><p><code>loader</code> 让 <code>webpack</code> 能够去处理那些非 <code>JavaScript</code> 文件（<code>webpack</code> 自身只理解 <code>JavaScript</code>）。<code>loader</code> 可以将所有类型的文件转换为 <code>webpack</code> 能够处理的有效模块，然后你就可以利用 <code>webpack</code> 的打包能力，对它们进行处理。<br>所以可以通过引入各种<code>loader</code>实现我们打包不同类型文件的目的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">const path = require(&apos;path&apos;);</span><br><span class="line"></span><br><span class="line">const config = &#123;</span><br><span class="line">  output: &#123;</span><br><span class="line">    filename: &apos;my-first-webpack.bundle.js&apos;</span><br><span class="line">  &#125;,</span><br><span class="line">  module: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      &#123; test: /\.txt$/, use: &apos;raw-loader&apos; &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">module.exports = config;</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>上述代码即表示了<code>loader</code>的两个重要属性值</p>
-<ol>
-<li><code>test</code>: 用于标识出应该被对应的 loader 进行转换的某个或某些文件</li>
-<li><code>use</code>: 用于转换时，确定使用哪种<code>loader</code></li>
-</ol>
-</blockquote>
-<h4 id="插件-plugins"><a href="#插件-plugins" class="headerlink" title="插件(plugins)"></a>插件(<code>plugins</code>)</h4><p><code>loader</code>被用来转换各类模块，而插件能实现更强大、范围更广的任务。插件的范围包括，从打包优化和压缩，一直到重新定义环境中的变量。<br>想要使用一个插件，你只需要 require() 它，然后把它添加到 plugins 数组中。多数插件可以通过选项(option)自定义。你也可以在一个配置文件中因为不同目的而多次使用同一个插件，这时需要通过使用 new 操作符来创建它的一个实例。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">const HtmlWebpackPlugin = require(&apos;html-webpack-plugin&apos;); // 通过 npm 安装</span><br><span class="line">const webpack = require(&apos;webpack&apos;); // 用于访问内置插件</span><br><span class="line"></span><br><span class="line">const config = &#123;</span><br><span class="line">  module: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      &#123; test: /\.txt$/, use: &apos;raw-loader&apos; &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [</span><br><span class="line">    new webpack.optimize.UglifyJsPlugin(),</span><br><span class="line">    new HtmlWebpackPlugin(&#123;template: &apos;./src/index.html&apos;&#125;)</span><br><span class="line">  ]</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">module.exports = config;</span><br></pre></td></tr></table></figure></p>
-<p>插件的功能很强大，而能被使用的插件种类也很丰富，许多开箱即用的插件都在<a href="https://webpack.docschina.org/plugins" target="_blank" rel="noopener">插件列表</a>中可以看到。</p>
+<p>上面的代码简单的表示了<code>output</code>的作用，通过<code>path</code>,<code>filename</code>对输出的文件进行路径以及名称的设置<br>
 
-
+    
+	  <div class="readmore">
+      <a href="/2018/06/24/初识webpack-4-0/">Read More</a>
+    </div>
     
     
     
