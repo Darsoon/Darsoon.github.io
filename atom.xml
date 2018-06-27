@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-06-25T13:11:21.888Z</updated>
+  <updated>2018-06-27T14:33:28.556Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>你不知道的JavaScript(中卷)笔记(一)</title>
+    <link href="http://yoursite.com/2018/06/27/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84JavaScript-%E4%B8%AD%E5%8D%B7-%E7%AC%94%E8%AE%B0-%E4%B8%80/"/>
+    <id>http://yoursite.com/2018/06/27/你不知道的JavaScript-中卷-笔记-一/</id>
+    <published>2018-06-27T13:25:22.000Z</published>
+    <updated>2018-06-27T14:33:28.556Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>最近在匆匆看了<a href="mailto:`webpack@4.0" target="_blank" rel="noopener">`webpack@4.0</a><code>文档之后，又被</code>《你不知道的JavaScript》<code>吸引了目光。这本书针对</code>JavaScript`中存在的一些容易出错的地方进行解答，可以夯实自己的基础。</p></blockquote><h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><blockquote><p><code>JavaScript</code>有七种内置类型，包括<code>null</code> <code>undefined</code> <code>number</code> <code>string</code> <code>boolean</code> <code>object</code>和<code>symbol</code>(ES6)</p></blockquote><ol><li><code>JavaScript</code>的变量是没有类型的，有类型的是值。但变量持有值的类型。类型定义了值的行为特征</li><li><code>undefined</code>表示声明后但未赋值的，<code>undeclared</code>表示未声明的。这两者有稍微的区别，但在<code>JavaScript</code>中并未区分</li><li><p>我们可以通过<code>typeof</code>指令来确定值的类型</p><pre><code>![示例](https://s1.ax1x.com/2018/06/27/Pi9Sit.png)</code></pre><p>可以很清楚的发现通过<code>typeof</code>指令能得到大多数值的类型，然而这里没有出现<code>null</code> <code>object</code>相关代码。这是因为<code>typeof null</code>的结果也是<code>object</code>，这是<code>JavaScript</code>设计的错误，所以如果想判断是否类型为<code>null</code>,可以通过</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!a&amp;&amp;typeof a === &apos;object&apos;</span><br></pre></td></tr></table></figure></li><li><p>我们可以使用<code>typeof</code>指令来检查<code>undeclared</code>变量，因为<code>typeof</code>有安全防范机制（阻止报错）</p></li></ol><h2 id="值"><a href="#值" class="headerlink" title="值"></a>值</h2><blockquote><p>数组(<code>array</code>)、字符串(<code>string</code>)、数字(<code>number</code>)是<code>JavaScript</code>的程序基本组成部分，但在使用过程中，还是有一些坑</p></blockquote><h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><blockquote><p>相对于其他强类型语言来说，<code>JavaScript</code>中的数组是不用事先声明数组容量和类型的，所以数组可以容纳任意类型的值</p></blockquote><ol><li>可以使用<code>delete</code>运算符删除数组中的元素，但数组的长度并不会减少</li><li>数组是通过数字索引来获取值的，但由于数组同样是对象，所以可以通过对象的方式获取值<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var a = []</span><br><span class="line">a[0] = 1</span><br><span class="line">a[&apos;today&apos;] = &apos;sunday&apos;</span><br><span class="line"></span><br><span class="line">a.length // 1</span><br><span class="line">a[&apos;today] // &apos;sunday&apos;</span><br><span class="line">a.today // &apos;sunday&apos;</span><br></pre></td></tr></table></figure></li></ol><blockquote><p>这里有两点要注意的是，使用字符串键值来赋值的话，数组的长度并不会增加；如果字符串键值是可以被强制转换为数字的值的话，会被当做数字索引来处理<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a[&apos;2018&apos;] = 2018</span><br><span class="line">a[&apos;2018&apos;] // 2018</span><br><span class="line">a[2018] //2018</span><br></pre></td></tr></table></figure></p></blockquote><p>所以通过数组来存放字符串键值/属性并不是很合适的做法，应该使用对象</p><h4 id="类数组"><a href="#类数组" class="headerlink" title="类数组"></a>类数组</h4><blockquote><p>类数组是具有数组的某种特性（可以通过数字索引）的值，我们可以通过某些方式，例如<code>slice</code>,<code>concat</code>等数组工具函数来实现将其转换为真正的数组</p></blockquote><p><img src="https://s1.ax1x.com/2018/06/27/PiC49x.png" alt="转换类数组"></p><p>如上图的两种方法，都可以将类数组转换为真正的数组</p><h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><blockquote><p>字符串和数组很相似，都由<code>length</code>属性以及<code>indexOf()</code>、<code>concat()</code>方法，但字符串不等于字符数组</p></blockquote><ol><li>字符串是不可变的，而数组是可变的。这里指的不可变是字符串的原始成员不会被改变值，而是会创建并返回一个新的字符串<br><img src="https://s1.ax1x.com/2018/06/27/PiCOUA.png" alt="字符串不是字符数组"></li><li><p>字符串和数组可以通过函数进行相互的处理，这在某些时候是很方便的<br><img src="https://s1.ax1x.com/2018/06/27/PiParD.png" alt="字符串反转"></p><h3 id="数字"><a href="#数字" class="headerlink" title="数字"></a>数字</h3><blockquote><p><code>JavaScript</code>只有一种数值类型：数字(number)，包括整数以及带小数的十进制数。</p></blockquote></li><li><p>可以使用<code>toFixed</code>保留小数部分位数(但有坑)</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">12.toFixed(3) //SyntaxError</span><br></pre></td></tr></table></figure></li></ol><p>如果直接使用值去调用数值方法，将会报错，因为解析的时候会认为<code>12.</code>是整体，可以通过以下方法调用数值方法<br><img src="https://s1.ax1x.com/2018/06/27/PiP7R0.png" alt="调用数值方法"></p><ol start="2"><li><code>NaN</code>值<code>Not a Number</code>即不是数值，<code>NaN</code>不等于<code>NaN</code></li><li><code>null</code>值空值，<code>undefined</code>值没有值</li><li><code>0</code>值包括<code>+0</code>和<code>-0</code><h3 id="值和引用"><a href="#值和引用" class="headerlink" title="值和引用"></a>值和引用</h3><blockquote><p><code>JavaScript</code>中值的几种类型，在实际的赋值和参数传递中，分为值传递和引用传递</p></blockquote></li><li>值传递是指直接复制指的方法进行赋值，简单类型的赋值都是值传递</li><li>引用传递是指将复杂类型值的存储地址赋给变量，这样相当于两者共享一个空间，都可对该地址的值做出更改，并会影响对方</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;最近在匆匆看了&lt;a href=&quot;mailto:`webpack@4.0&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;`webpack@4.0&lt;/a&gt;&lt;code&gt;文档之后，又被&lt;/code&gt;《你不知道的JavaScript》&lt;co
+      
+    
+    </summary>
+    
+    
+      <category term="JavaScript" scheme="http://yoursite.com/tags/JavaScript/"/>
+    
+      <category term="基础知识" scheme="http://yoursite.com/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    
+  </entry>
   
   <entry>
     <title>webpack建立开发环境</title>
