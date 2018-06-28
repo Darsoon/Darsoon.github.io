@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>Archives: 2018/6 | 好好学习，天天摸鱼</title>
+  <title>Category: JavaScript， 你不知道的JavaScript | 好好学习，天天摸鱼</title>
   <meta name="description" content="这是一个日常划水的辣鸡前端博客" />
   <meta name="keywords" content="blog,IT,Web Front End" />
   <meta name="HandheldFriendly" content="True" />
@@ -16,7 +16,7 @@
 <meta name="keywords" content="blog,IT,Web Front End">
 <meta property="og:type" content="website">
 <meta property="og:title" content="好好学习，天天摸鱼">
-<meta property="og:url" content="http://yoursite.com/archives/2018/06/index.html">
+<meta property="og:url" content="http://yoursite.com/categories/JavaScript，-你不知道的JavaScript/index.html">
 <meta property="og:site_name" content="好好学习，天天摸鱼">
 <meta property="og:description" content="这是一个日常划水的辣鸡前端博客">
 <meta property="og:locale" content="zh-CN">
@@ -114,9 +114,8 @@
     <div class='container clearfix'>
       <div class='l_main'>
         
-	
   <script>
-    window.subData= { title:'Year : 2018.6'}
+    window.subData= { title:'Category : JavaScript， 你不知道的JavaScript'}
   </script>
 
 <section class="post-list">
@@ -167,150 +166,7 @@
 </article>
     </div>
   
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2018/06/27/你不知道的JavaScript-中卷-笔记-一/">
-        你不知道的JavaScript(中卷)笔记(一)
-      </a>
-    </h2>
-    
-    <time>
-      6月 27, 2018
-    </time>
-		
-    
-    <div class='cats'>
-        <a href="/categories/JavaScript/">JavaScript</a>, <a href="/categories/JavaScript/你不知道的JavaScript/">你不知道的JavaScript</a>
-    </div>
-
-  </section>
-  <section class="article typo">
-	  <blockquote>
-<p>最近在匆匆看了<a href="mailto:`webpack@4.0" target="_blank" rel="noopener">`webpack@4.0</a><code>文档之后，又被</code>《你不知道的JavaScript》<code>吸引了目光。这本书针对</code>JavaScript`中存在的一些容易出错的地方进行解答，可以夯实自己的基础。</p>
-</blockquote>
-<h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><blockquote>
-<p><code>JavaScript</code>有七种内置类型，包括<code>null</code> <code>undefined</code> <code>number</code> <code>string</code> <code>boolean</code> <code>object</code>和<code>symbol</code>(ES6)</p>
-</blockquote>
-<ol>
-<li><code>JavaScript</code>的变量是没有类型的，有类型的是值。但变量持有值的类型。类型定义了值的行为特征</li>
-<li><code>undefined</code>表示声明后但未赋值的，<code>undeclared</code>表示未声明的。这两者有稍微的区别，但在<code>JavaScript</code>中并未区分
-
-    
-	  <div class="readmore">
-      <a href="/2018/06/27/你不知道的JavaScript-中卷-笔记-一/">Read More</a>
-    </div>
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/JavaScript/">JavaScript</a>
-      
-        <a href="/tags/基础知识/">基础知识</a>
-      
-	  </div>
-    
-  </section>
-</article>
-    </div>
-  
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2018/06/25/webpack建立开发环境/">
-        webpack建立开发环境
-      </a>
-    </h2>
-    
-    <time>
-      6月 25, 2018
-    </time>
-		
-    
-    <div class='cats'>
-        <a href="/categories/webpack/">webpack</a>
-    </div>
-
-  </section>
-  <section class="article typo">
-	  <blockquote>
-<p><code>webpack</code>的强大在开发中能够得到更直白的体现，学习使用<code>Webpack</code>搭建开发环境，能够让开发更简单一些</p>
-</blockquote>
-<h3 id="使用source-map"><a href="#使用source-map" class="headerlink" title="使用source map"></a>使用source map</h3><blockquote>
-<p><code>webpack</code>能够打包我们的代码，虽然使用起来很方便，但在排除错误时，只会指向我们打包生成的<code>bundle.js</code>，很难定位到相应的准确位置。使用<code>source map</code>,能够跟踪错误的警告信息。<br><a href="https://webpack.docschina.org/configuration/devtool" target="_blank" rel="noopener">source map</a>有许多配置信息，可以仔细查阅<br><code>webpack.config.js</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">const path = require(&apos;path&apos;)</span><br><span class="line">const HtmlWebpackPlugin = require(&apos;html-webpack-plugin&apos;)</span><br><span class="line">const CleanWebpackPlugin = require(&apos;clean-webpack-plugin&apos;)</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    app: &apos;./src/index.js&apos;,</span><br><span class="line">    print: &apos;./src/print.js&apos;</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [</span><br><span class="line">    new HtmlWebpackPlugin(&#123;</span><br><span class="line">      title: &apos;Output Management&apos;</span><br><span class="line">    &#125;),</span><br><span class="line">    new CleanWebpackPlugin([&apos;dist&apos;])</span><br><span class="line">  ],</span><br><span class="line">  output: &#123;</span><br><span class="line">    filename: &apos;[name].bundle.js&apos;,</span><br><span class="line">    path: path.resolve(__dirname, &apos;dist&apos;)</span><br><span class="line">  &#125;,</span><br><span class="line">  devtool: &apos;inline-cheap-module-source-map&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-
-    
-	  <div class="readmore">
-      <a href="/2018/06/25/webpack建立开发环境/">Read More</a>
-    </div>
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/webpack/">webpack</a>
-      
-        <a href="/tags/开发环境/">开发环境</a>
-      
-	  </div>
-    
-  </section>
-</article>
-    </div>
-  
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2018/06/24/初识webpack-4-0/">
-        初识webpack@4.0
-      </a>
-    </h2>
-    
-    <time>
-      6月 24, 2018
-    </time>
-		
-    
-    <div class='cats'>
-        <a href="/categories/webpack/">webpack</a>
-    </div>
-
-  </section>
-  <section class="article typo">
-	  <h2 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h2><blockquote>
-<p><code>webpack</code> 是一个现代 <code>JavaScript</code>应用程序的静态模块打包器，当 <code>webpack</code> 处理应用程序时，它会递归地构建一个依赖关系图(<code>dependency graph</code>)，其中包含应用程序需要的每个模块，然后将所有这些模块打包成一个或多个 <code>bundle</code>。</p>
-</blockquote>
-<h3 id="webpack的四个核心概念"><a href="#webpack的四个核心概念" class="headerlink" title="webpack的四个核心概念"></a>webpack的四个核心概念</h3><h4 id="入口-entry"><a href="#入口-entry" class="headerlink" title="入口(entry)"></a>入口(<code>entry</code>)</h4><p>入口起点标明了<code>webpack</code>应该使用哪个模块，从哪个文件作为构建依赖包的开始<br>可以在<code>webpack.config.js</code>中的<code>entry</code>配置简单入口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  entry: &apos;./path/to/my/entry/file.js&apos;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-
-    
-	  <div class="readmore">
-      <a href="/2018/06/24/初识webpack-4-0/">Read More</a>
-    </div>
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/webpack/">webpack</a>
-      
-        <a href="/tags/前端工具/">前端工具</a>
-      
-	  </div>
-    
-  </section>
-</article>
-    </div>
-  
 </section>
-
 
 
       </div>
