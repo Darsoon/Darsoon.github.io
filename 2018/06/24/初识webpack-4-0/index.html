@@ -34,72 +34,6 @@
       document.getElementById('loading-bar').style.width=num+"%";
     }
   </script>
-<!-- sensorsdata SDK -->
-<!-- sensorsdata SDK -->
-<script>
-  window.webkit = {
-      messageHandlers: {
-          sensorsdataNativeTracker: {
-              postMessage: function(data) {
-                  debugger;
-              }
-          }
-      }
-  };
-  (function(para) {
-    var p = para.sdk_url, n = para.name, w = window, d = document, s = 'script',x = null,y = null;
-    if(typeof(w['sensorsDataAnalytic201505']) !== 'undefined') {
-        return false;
-    }
-    w['sensorsDataAnalytic201505'] = n;
-    w[n] = w[n] || function(a) {return function() {(w[n]._q = w[n]._q || []).push([a, arguments]);}};
-    var ifs = ['track','quick','register','registerPage','registerOnce','trackSignup', 'trackAbtest', 'setProfile','setOnceProfile','appendProfile', 'incrementProfile', 'deleteProfile', 'unsetProfile', 'identify','login','logout','trackLink','clearAllRegister'];
-    for (var i = 0; i < ifs.length; i++) {
-      w[n][ifs[i]] = w[n].call(null, ifs[i]);
-    }
-    if (!w[n]._t) {
-        setTimeout(function() {
-
-
-      x = d.createElement(s), y = d.getElementsByTagName(s)[0];
-      x.async = 1;
-      x.src = p;
-      w[n].para = para;
-      y.parentNode.insertBefore(x, y);
-
-      }, 3000);
-    }
-  })({
-      is_track_single_page: true,
-      //send_type: 'ajax',
-      //use_app_track: true,
-        sdk_url: 'http://kang335.gitee.io/satest/sensorsdata.full.js?r=' + Math.random(),
-        name: 'sensors',
-        server_url:'https://test-syg.datasink.sensorsdata.cn/sa?token=27f1e21b78daf376&project=lixiang',
-        //heatmap_url神策分析中点击分析及触达分析功能代码，代码生成工具会自动生成。如果神策代码中 `sensorsdata.min.js` 版本是 1.9.1 及以上版本，这个参数必须配置，低于此版本不需要配置
-        vtrack_url: 'http://kang335.gitee.io/satest/vtrack.full.js?r=' + Math.random(),
-        heatmap: {
-        }
-      });
-      sensors.quick('autoTrack');
-  </script>
-<!-- GrowingIO Analytics code version 2.1 -->
-<!-- Copyright 2015-2018 GrowingIO, Inc. More info available at http://www.growingio.com -->
-
-<script type='text/javascript'>
-!function(e,t,n,g,i){e[i]=e[i]||function(){(e[i].q=e[i].q||[]).push(arguments)},n=t.createElement("script"),tag=t.getElementsByTagName("script")[0],n.async=1,n.src=('https:'==document.location.protocol?'https://':'http://')+g,tag.parentNode.insertBefore(n,tag)}(window,document,"script","assets.giocdn.com/2.1/gio.js","gio");
-gio('init','9df64b93e2eb1ed2', {});
-
-//custom page code begin here
-
-//custom page code end here
-
-gio('send');
-
-</script>
-
-<!-- End GrowingIO Analytics code version: 2.1 -->
-
 </head>
 
 <body>
@@ -355,7 +289,57 @@ gio('send');
 </script>
 <script src="/js/search.js"></script>
 <script src="/js/app.js"></script>
+<!-- sensorsdata SDK -->
+<script>
+    
+  (function(para) {
+    var p = para.sdk_url, n = para.name, w = window, d = document, s = 'script',x = null,y = null;
+    if(typeof(w['sensorsDataAnalytic201505']) !== 'undefined') {
+        return false;
+    }
+    w['sensorsDataAnalytic201505'] = n;
+    w[n] = w[n] || function(a) {return function() {(w[n]._q = w[n]._q || []).push([a, arguments]);}};
+    var ifs = ['track','quick','register','registerPage','registerOnce','trackSignup', 'trackAbtest', 'setProfile','setOnceProfile','appendProfile', 'incrementProfile', 'deleteProfile', 'unsetProfile', 'identify','login','logout','trackLink','clearAllRegister'];
+    for (var i = 0; i < ifs.length; i++) {
+      w[n][ifs[i]] = w[n].call(null, ifs[i]);
+    }
+    if (!w[n]._t) {
+      x = d.createElement(s), y = d.getElementsByTagName(s)[0];
+      x.async = 1;
+      x.src = p;
+      w[n].para = para;
+      y.parentNode.insertBefore(x, y);
+    }
+  })({
+      is_track_single_page: false,
+      //send_type: 'ajax',
+      //use_app_track: true,
+        sdk_url: 'http://kang335.gitee.io/satest/sensorsdata.full.js?r=' + Math.random(),
+        name: 'sensors',
+        server_url:'https://test-syg.datasink.sensorsdata.cn/sa?token=27f1e21b78daf376&project=lixiang',
+        //heatmap_url神策分析中点击分析及触达分析功能代码，代码生成工具会自动生成。如果神策代码中 `sensorsdata.min.js` 版本是 1.9.1 及以上版本，这个参数必须配置，低于此版本不需要配置
+        vtrack_url: 'http://kang335.gitee.io/satest/vtrack.full.js?r=' + Math.random(),
+        heatmap: {
+        }
+      });
+      sensors.quick('autoTrack');
+  </script>
+<!-- GrowingIO Analytics code version 2.1 -->
+<!-- Copyright 2015-2018 GrowingIO, Inc. More info available at http://www.growingio.com -->
 
+<script type='text/javascript'>
+!function(e,t,n,g,i){e[i]=e[i]||function(){(e[i].q=e[i].q||[]).push(arguments)},n=t.createElement("script"),tag=t.getElementsByTagName("script")[0],n.async=1,n.src=('https:'==document.location.protocol?'https://':'http://')+g,tag.parentNode.insertBefore(n,tag)}(window,document,"script","assets.giocdn.com/2.1/gio.js","gio");
+gio('init','9df64b93e2eb1ed2', {});
+
+//custom page code begin here
+
+//custom page code end here
+
+gio('send');
+
+</script>
+
+<!-- End GrowingIO Analytics code version: 2.1 -->
 
   <script>setLoadingBarProgress(100);</script>
 </body>
